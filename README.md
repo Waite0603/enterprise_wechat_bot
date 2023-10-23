@@ -54,6 +54,33 @@
 
 
 
+## 消息主动推送
+
+> 仅提供 `text` 类型推送, 其他类型请参考 https://developer.work.weixin.qq.com/document/path/90235
+
+1. 需在 应用管理 -> 配置企业可信 IP 为服务器 IP
+2. 运行 api.examples.MessageTest.py 更改其中 to_user 为企业中成员姓名
+3. 运行后即可在微信中收到推送消息
+
+>注意:
+> token是需要缓存的，不能每次调用都去获取token，否则会中频率限制
+
+在本库的设计里，token是以类里的一个变量缓存的
+比如api/src/CorpApi.py 里的access_token变量
+在类的生命周期里，这个accessToken都是存在的， 当且仅当发现token过期，CorpAPI类会自动刷新token
+刷新机制在 api/src/AbstractApi.py
+所以，使用时，只需要全局实例化一个CorpAPI类，不要析构它，就可一直用它调函数，不用关心 token
+
+```python
+api = CorpAPI(corpid, corpsecret);
+api.dosomething()
+api.dosomething()
+api.dosomething()
+....
+```
+当然，如果要更严格的做的话，建议自行修改，全局缓存token，比如存redis、存文件等，失效周期设置为2小时。
+
+
 ## 截图
 
 ![image-20231023150035965](https://qiniu.waite.wang/202310231500336.png)

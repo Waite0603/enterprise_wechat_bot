@@ -52,9 +52,9 @@ def callback_message():
     from_user = xml_tree.find("FromUserName").text
     to_user = xml_tree.find("ToUserName").text
 
-    # print(content)
-    # print(from_user)
-    # print(to_user)
+    print(content)
+    print(from_user)
+    print(to_user)
 
     # 构造回复的 XML
     reply_xml = """
