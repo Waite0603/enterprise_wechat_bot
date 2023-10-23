@@ -1,3 +1,5 @@
+[TOC]
+
 > 官方文档: https://developer.work.weixin.qq.com/document
 > 
 > 项目参考: https://github.com/sbzhu/weworkapi_python/tree/master
@@ -62,6 +64,44 @@
 2. 运行 api.examples.MessageTest.py 更改其中 to_user 为企业中成员姓名
 3. 运行后即可在微信中收到推送消息
 
+> 以下为发送应用消息类型: https://developer.work.weixin.qq.com/document/path/90250#%E5%9B%BE%E7%89%87%E6%B6%88%E6%81%AF
+### 临时素材上传
+
++ 在某些推送只支持 `media_id` 推送文件, 图片 或者 语音
++ 详细查看 https://developer.work.weixin.qq.com/document/path/91054
++ 所有文件size必须大于5个字节
+  - 图片（image）：10MB，支持JPG,PNG格式
+  - 语音（voice） ：2MB，播放长度不超过60s，**仅支持**AMR格式
+  - 视频（video） ：10MB，支持MP4格式
+  - 普通文件（file）：20MB
+
+```python
+# 以下为调用临时素材上传接口, 如需使用建议封装, 文档: https://developer.work.weixin.qq.com/document/path/90253
+path = "exam.png"
+img_url = "https://qyapi.weixin.qq.com/cgi-bin/media/upload?access_token{}&type=image".format(api.getAccessToken())
+files = {'image': open(path, 'rb')}
+r = requests.post(img_url, files=files)
+re = json.loads(r.text)
+# print(re)
+media_id = re['media_id']
+```
+
+
+
+### 文本消息
+
+> 支持 html 语法, 参考 `api/examples/MessageTest.py` 
+### 图片推送
+
++ 图片推送需要先行调用临时素材上传接口, 并获取接口返回值中的 `media_id` 数据
++ 推送只支持`media_id` 传参
++ 在 `api/examples/ImgTest.py` 提供上传以及推送示例, 但建议自行封装成方法
+
+
+
+
+
+
 >注意:
 > token是需要缓存的，不能每次调用都去获取token，否则会中频率限制
 
@@ -87,4 +127,4 @@ api.dosomething()
 
 ![image-20231023150113305](https://qiniu.waite.wang/202310231501014.png)
 
-    
+​    

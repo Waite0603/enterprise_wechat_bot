@@ -1,12 +1,5 @@
 # coding = utf-8
-"""
-    @project: wechat_bot
-    @Author：Waite0603
-    @file： MessageTest.py
-    @date：2023/10/23 15:35
-    
-    TODO:
-"""
+
 import random
 
 from api.src.CorpApi import *
@@ -20,7 +13,6 @@ to_user = "WangZiCong|momeak"
 text = "这是一条测试消息"
 
 try:
-    ##
     response = api.httpCall(
         CORP_API_TYPE['MESSAGE_SEND'],
         {
