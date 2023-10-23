@@ -1,5 +1,5 @@
 from flask import Flask, request
-from WXBizMsgCrypt3 import WXBizMsgCrypt
+from callback.WXBizMsgCrypt3 import WXBizMsgCrypt
 from lxml import etree
 import time
 

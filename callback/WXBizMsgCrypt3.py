@@ -8,7 +8,7 @@ from Cryptodome.Cipher import AES
 import xml.etree.cElementTree as ET
 import socket
 
-import ierror
+from callback import ierror
 
 
 """
