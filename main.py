@@ -4,6 +4,7 @@ from lxml import etree
 import time
 
 from configobj import ConfigObj
+from receive.PassiveRecovery import PassiveRecovery
 
 config = ConfigObj('./config.ini', encoding='utf-8')
 debug_mode = config['dev'].as_bool('debug')
@@ -48,24 +49,25 @@ def callback_message():
 
     # 解析 XML
     xml_tree = etree.fromstring(sMsg)
-    content = xml_tree.find("Content").text
+    print(xml_tree)
+
     from_user = xml_tree.find("FromUserName").text
     to_user = xml_tree.find("ToUserName").text
+    msg_type = xml_tree.find("MsgType").text
 
-    print(content)
     print(from_user)
     print(to_user)
+    print(msg_type)
 
-    # 构造回复的 XML
-    reply_xml = """
-    <xml>
-        <ToUserName><![CDATA[{to_user}]]></ToUserName>
-        <FromUserName><![CDATA[{from_user}]]></FromUserName>
-        <CreateTime>{create_time}</CreateTime>
-        <MsgType><![CDATA[text]]></MsgType>
-        <Content><![CDATA[{content}]]></Content>
-    </xml>
-    """.format(to_user=from_user, from_user=to_user, create_time=int(time.time()), content=content)
+    # 消息被动回复
+    if msg_type == 'text':
+        content = xml_tree.find("Content").text
+        print(content)
+        reply_xml = PassiveRecovery(to_user, from_user, msg_type, msg_content=content).text()
+    else:
+        media_id = xml_tree.find("MediaId").text
+        print(media_id)
+        reply_xml = PassiveRecovery(to_user, from_user, msg_type, media_id=media_id).image()
 
     # 加密回复的 XML
     ret, sEncryptMsg = wxcpt.EncryptMsg(reply_xml, nonce, timestamp)
@@ -76,4 +78,4 @@ def callback_message():
 
 
 if __name__ == '__main__':
-    app.run(debug=debug_mode)
+    app.run(debug=debug_mode, port=8888)

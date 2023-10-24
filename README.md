@@ -54,6 +54,16 @@
 > 创建 `API接收消息` 时报错 `50001` 时可能是网络延迟, 请等待 15 - 30 秒左右重新尝试
 
 
+## 接收消息和事件
+
+> 详细查看 https://developer.work.weixin.qq.com/document/path/90238
+> 
+> 获取临时素材接口 https://developer.work.weixin.qq.com/document/path/90254
+> 
+> 在 `receive.py` 有简单的参考,本项目不再详细描述, 具体参考官方文档自行开发
+> 
+> 在 `main.py` 中引用了 `receive` 中的方法, 图片/ 视频接收好像会发送两次链接请求, 具体原因不明, 请自行查看(因为我想做的东西没有这个需求, 而且有替代方案, so 不管啦)
+ 
 
 ## 消息主动推送
 
