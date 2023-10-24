@@ -107,9 +107,6 @@ media_id = re['media_id']
   + 小程序推送需要申请权限, 否则会有 `48002`报错, 具体[点击查看](https://developer.work.weixin.qq.com/devtool/query?e=48002)
 + 具体案例在 `api/examples` 中, 不确保正确/ 规范与否, 具体以[官方文档](https://developer.work.weixin.qq.com/document/path/90235)为主
 
-> 测试截图
-
-![c99fcd1aafc1438e2e970e0855156c1](https://qiniu.waite.wang/202310242128667.jpg)
 
 ### Token 相关
 
@@ -138,4 +135,3 @@ api.dosomething()
 
 ![image-20231023150113305](https://qiniu.waite.wang/202310231501014.png)
 
-​    
