@@ -9,7 +9,7 @@ config = ConfigObj('../../config.ini', encoding='utf-8')
 
 api = CorpApi(config['wechat']['CorpID'], config['wechat']['Secret'])
 
-to_user = "WangZiCong|momeak"
+to_user = "momeak"
 
 markdownContent = """
 您的会议室已经预定，稍后会同步到`邮箱`

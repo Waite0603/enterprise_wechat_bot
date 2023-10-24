@@ -6,7 +6,6 @@
 > 
 > 项目结构请自行调整, 代码都是网上 copy 的, 能通过企业微信的回调认证, 其他后续的功能扩展请自行添加
 
-
 ## 项目准备
 
 > 1. 本项目建设您已经创建好企业微信账号并且完成相关的个人或者企业认证
@@ -74,6 +73,11 @@
   - 语音（voice） ：2MB，播放长度不超过60s，**仅支持**AMR格式
   - 视频（video） ：10MB，支持MP4格式
   - 普通文件（file）：20MB
++ 如果需要上传更大的素材文件, 可以尝试异步上传临时素材接口 https://developer.work.weixin.qq.com/document/path/96219
+  - 图片（image）：暂不支持
+  + 语音（voice） ：暂不支持
+  + 视频（video） ：**200MB**，仅支持MP4格式
+  + 普通文件（file）：**200MB**
 
 ```python
 # 以下为调用临时素材上传接口, 如需使用建议封装, 文档: https://developer.work.weixin.qq.com/document/path/90253
@@ -86,20 +90,18 @@ re = json.loads(r.text)
 media_id = re['media_id']
 ```
 
+### 推送注意事项
 
++ 图片, 视频, 语音, 图文消息推送需要先行调用临时素材上传接口, 并获取接口返回值中的 `media_id` 数据
++ 以上推送文件只支持`media_id` 传参
+  + 小程序推送需要申请权限, 否则会有 `48002`报错, 具体[点击查看](https://developer.work.weixin.qq.com/devtool/query?e=48002)
++ 具体案例在 `api/examples` 中, 不确保正确/ 规范与否, 具体以[官方文档](https://developer.work.weixin.qq.com/document/path/90235)为主
 
-### 文本消息
+> 测试截图
 
-> 支持 html 语法, 参考 `api/examples/MessageTest.py` 
-### 图片推送
+![c99fcd1aafc1438e2e970e0855156c1](https://qiniu.waite.wang/202310242128667.jpg)
 
-+ 图片推送需要先行调用临时素材上传接口, 并获取接口返回值中的 `media_id` 数据
-+ 推送只支持`media_id` 传参
-+ 在 `api/examples/ImgTest.py` 提供上传以及推送示例, 但建议自行封装成方法
-
-
-
-
+### Token 相关
 
 
 >注意:
@@ -112,14 +114,13 @@ media_id = re['media_id']
 所以，使用时，只需要全局实例化一个CorpAPI类，不要析构它，就可一直用它调函数，不用关心 token
 
 ```python
-api = CorpAPI(corpid, corpsecret);
+api = CorpAPI(corpid, corpsecret)
 api.dosomething()
 api.dosomething()
 api.dosomething()
 ....
 ```
 当然，如果要更严格的做的话，建议自行修改，全局缓存token，比如存redis、存文件等，失效周期设置为2小时。
-
 
 ## 截图
 

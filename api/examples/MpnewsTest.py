@@ -9,7 +9,7 @@ config = ConfigObj('../../config.ini', encoding='utf-8')
 
 api = CorpApi(config['wechat']['CorpID'], config['wechat']['Secret'])
 
-to_user = "WangZiCong|momeak"
+to_user = "momeak"
 text = "这是一条测试消息"
 
 try:
