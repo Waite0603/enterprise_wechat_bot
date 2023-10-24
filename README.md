@@ -1,10 +1,10 @@
-[TOC]
-
 > 官方文档: https://developer.work.weixin.qq.com/document
 > 
 > 项目参考: https://github.com/sbzhu/weworkapi_python/tree/master
 > 
 > 项目结构请自行调整, 代码都是网上 copy 的, 能通过企业微信的回调认证, 其他后续的功能扩展请自行添加
+>
+> 因为参考仓库没有注明开源协议, 非个人开发者请谨慎使用!!!
 
 ## 项目准备
 
