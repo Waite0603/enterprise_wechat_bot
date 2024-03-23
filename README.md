@@ -43,7 +43,7 @@
 
 ## 项目启动
 
-1. 把以上所需参数填入 `example.config.ini` 中
+1. 把以上所需参数填入 `example.config.ini` 中并且更改文件名字为 `config.ini` 
 2. `pip install -r requirements.txt`
 3. 运行 `main.py`
 4. 可以实现简单的企业微信的回调认证以及消息的接收和返回, 其他具体的功能需要开发者自行开发以及植入
